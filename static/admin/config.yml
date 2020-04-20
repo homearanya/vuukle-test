@@ -1,0 +1,52 @@
+backend:
+  name: bitbucket
+  repo: vuukleteam/help-center # Path to your Bitbucket repository
+  branch: master
+# test comment
+media_folder: static/img
+public_folder: /img
+site_url: https://docs.vuukle.com
+logo_url: https://docs.vuukle.com/vuukle-logo.png
+show_preview_links: true
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: 'src/content/articles'
+    create: true
+    slug: '{{path}}'
+    preview_path: '{{path}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - {
+          label: 'Path',
+          name: 'path',
+          widget: 'string',
+          pattern: ['^\/[a-z0-9]+(?:-[a-z0-9]+)*\/$', '/this-is-a-right-path/'],
+          hint: 'Follow this pattern: "/this-is-a-path/"',
+        }
+      - { label: 'Published Date', name: 'date', widget: 'date', dateFormat: 'YYYY-MM-DD' }
+      - {
+          label: 'Category',
+          name: 'category',
+          widget: 'relation',
+          collection: 'categories',
+          searchFields: ['title'],
+          valueField: 'title',
+          displayFields: ['title'],
+        }
+      - { label: 'Tags', name: 'tags', widget: 'list', required: false, hint: 'Comma-separated tags' }
+      - { label: 'Short Description', name: 'shortDescription', widget: 'text', hint: For search engines }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: categories
+    label: Categories
+    label_singular: Category
+    folder: 'src/content/categories'
+    create: true
+    preview_path: 'categories/{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Short Description', name: 'description', widget: 'text' }
+      - { label: 'Icon', name: 'icon', widget: 'image' }
+      - { label: 'Display Order', name: 'displayOrder', widget: 'number', valueType: 'int', step: 1 }
