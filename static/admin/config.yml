@@ -1,6 +1,6 @@
 backend:
-  name: bitbucket
-  repo: vuukleteam/help-center # Path to your Bitbucket repository
+  name: github
+  repo: homearanya/vuukle-test # Path to your Bitbucket repository
   branch: master
 # test comment
 media_folder: static/img
